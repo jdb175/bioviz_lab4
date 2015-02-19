@@ -113,11 +113,31 @@ d3.json("us.json", function(error, us) {
       .style("stroke-width", function(d) {
         return 1 / Math.sqrt(valueById[d.id] * 5 || 1);
       })
-      .on({
-        "mouseover": hover,
-        "mouseout": hoverOff,
-        "mousemove": hoverMove
-      });
+      .on(
+        "mouseover", function(d) {
+            d3.select(this)
+            .transition()
+            .attr("transform", function(d) {
+              return "translate(0,0)"
+                  + "scale(1,1)"
+                  + "translate(0,0)";
+            });
+            hover(d);
+          })
+      .on("mouseout", function(d) {
+            d3.select(this)
+            .transition()
+            .attr("transform", function(d) {
+              var centroid = path.centroid(d),
+                  x = centroid[0],
+                  y = centroid[1];
+              return "translate(" + x + "," + y + ")"
+                  + "scale(" + Math.sqrt(valueById[d.id] * 5 || 0) + ")"
+                  + "translate(" + -x + "," + -y + ")";
+            });
+            hover(d);
+          })
+      .on("mousemove", hoverMove);
 });
 
 
