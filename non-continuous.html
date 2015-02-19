@@ -38,6 +38,11 @@
   stroke: #ccc;
 }
 
+.stateoutline {
+  fill: none;
+  stroke: #666;
+}
+
 .state {
   fill: #ccc;
   stroke: #666;
@@ -85,6 +90,13 @@ d3.json("us.json", function(error, us) {
       .attr("class", "land")
       .attr("d", path);
 
+  svg.selectAll(".stateoutline")
+      .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+      .attr("class", "stateoutline")
+      .attr("d", path)
+      .style("stroke-width", 1);
+
   svg.selectAll(".state")
       .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
@@ -110,7 +122,6 @@ d3.json("us.json", function(error, us) {
 
 
 function hover (datum) {
-  console.log(datum);
   tooltip.style("visibility", "visible")
       .style("top", (d3.event.pageY-10)+"px")
       .style("left",(d3.event.pageX+15)+"px")
