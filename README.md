@@ -5,4 +5,6 @@ Since I've used d3 before, I decided to play around with something I had never t
 
 I then took a crack at getting the [Non-Contiguous Map](http://bl.ocks.org/mbostock/4055908) example working. I downloaded the US dataset and got the example working, and then added a couple of small things. I added highlighting on hover again, as well as a tooltip that showed the specific obesity rate when hovering over a state. You can get to this by clicking the link at the bottom of the first example.
 
+I also added background lines to each state, because it wasn't clear how much each was varying from its size.
+
 The live version is [here](http://jdb175.github.io/bioviz_lab4/).
